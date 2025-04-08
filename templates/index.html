@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parametric Power Outage Cover</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+<body> <div class="container">
+        <header>
+            <button id="darkModeToggle">lights</button>
+
+            <h1>Parametric Power Outage Cover</h1>
+            <h2>Powered by Ting Monitoring</h2>
+        </header>
+
+        <section class="policy-info card">
+            <h3>Policy Details</h3>
+            <p><strong>Insured:</strong> {{ policy_holder }}</p>
+            <p><strong>Policy No:</strong> {{ policy_number }}</p>
+            <p><strong>Trigger:</strong> Power Outage > {{ trigger_hours }} hours (detected by Ting)</p>
+            <p><strong>Payout:</strong> ${{ payout_amount }} (Automatic)</p>
+        </section>
+
+        <section class="status card">
+            <h3>Current Status</h3>
+            <div class="status-grid">
+                <div class="status-item power-status power-{{ power_status.lower() }}">
+                    <span class="label">Ting Power Status:</span>
+                    <span class="value">{{ power_status }}</span>
+                </div>
+                <div class="status-item outage-duration">
+                    <span class="label">Current Outage Duration:</span>
+                    <span class="value">{{ outage_duration_str }}</span>
+                </div>
+                <div class="status-item payout-status status-{{ payout_status.lower().replace(' ', '-').replace('!', '') }}">
+                    <span class="label">Payout Status:</span>
+                    <span class="value">{{ payout_status }}</span>
+                </div>
+            </div>
+             <p class="last-updated">Last Updated: {{ last_updated }}</p>
+        </section>
+
+        <section class="simulation card">
+             <h3>Simulation Controls (Demo Only)</h3>
+            <form action="{{ url_for('simulate') }}" method="post" class="controls-grid">
+                <button type="submit" name="action" value="outage_start" class="btn btn-danger">Simulate Outage Start</button>
+                <button type="submit" name="action" value="power_restored" class="btn btn-success">Simulate Power Restored</button>
+                <button type="submit" name="action" value="force_trigger" class="btn btn-warning">Force Trigger (>{{trigger_hours}}h)</button>
+                <button type="submit" name="action" value="initiate_payout" class="btn btn-primary"
+                    {% if payout_status != 'Threshold Met - Pending Payout' %}disabled{% endif %}>
+                    Initiate Payout
+                </button>
+                 <button type="submit" name="action" value="mark_paid" class="btn btn-secondary"
+                    {% if payout_status != 'Payout Initiated' %}disabled{% endif %}>
+                    Mark as Paid
+                </button>
+                <button type="submit" name="action" value="reset" class="btn btn-info">Reset Simulation</button>
+            </form>
+             <p class="note">Note: Refresh page or use controls to see status updates. In a real app, Ting data would update automatically.</p>
+        </section>
+
+    </div>
+
+    <script>
+        const toggleButton = document.getElementById('darkModeToggle');
+        const body = document.body; // Or document.documentElement if you prefer applying to <html>
+
+        // Function to apply the theme based on stored preference or system preference
+        function applyTheme() {
+            const storedTheme = localStorage.getItem('darkMode');
+            // If theme is stored, use it. Otherwise, could check system preference (optional)
+            if (storedTheme === 'enabled') {
+                body.classList.add('dark-mode');
+                // Optional: Update button text if needed
+                // toggleButton.textContent = 'Light Mode';
+            } else {
+                body.classList.remove('dark-mode');
+                // Optional: Update button text if needed
+                // toggleButton.textContent = 'Dark Mode';
+            }
+        }
+
+        // Apply theme on initial load
+        applyTheme();
+
+        // Add event listener for the toggle button
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            // Update localStorage based on the new state
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                // Optional: Update button text if needed
+                // toggleButton.textContent = 'Light Mode';
+            } else {
+                localStorage.setItem('darkMode', 'disabled'); // Or use removeItem
+                 // Optional: Update button text if needed
+                // toggleButton.textContent = 'Dark Mode';
+            }
+        });
+    </script>
+</body>
+</html>

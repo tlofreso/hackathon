@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    /* Light Mode Colors */
+    --bg-primary: #f4f5f7;          /* Light Gray */
+    --bg-card: #ffffff;             /* White */
+    --text-primary: #172b4d;        /* Dark Blue/Gray */
+    --text-secondary: #5e6c84;      /* Medium Gray */
+    --border-color: #dfe1e6;        /* Light Medium Gray */
+    --shadow-color: rgba(0,0,0,0.1);
+    --primary-color: #0052cc;       /* Atlassian Blue */
+    --primary-color-hover: #0041a3;
+    --primary-text-on-bg: #ffffff;  /* Text on primary background */
+    --success-color: #00875a;       /* Green */
+    --success-color-hover: #006644;
+    --danger-color: #de350b;        /* Red */
+    --danger-color-hover: #c72b09;
+    --warning-color: #ffab00;       /* Yellow */
+    --warning-color-hover: #ff9900;
+    --warning-text-on-bg: #172b4d;  /* Dark text on yellow */
+    --info-color: #00b8d9;          /* Cyan */
+    --info-color-hover: #00a3bf;
+    --disabled-opacity: 0.6;
+
+    --border-radius: 6px;
+    --box-shadow: 0 1px 2px var(--shadow-color);
+    --transition-speed: 0.3s;
+}
+
+body.dark-mode {
+    /* Dark Mode Colors */
+    --bg-primary: #161a1d;          /* Very Dark Gray/Blue */
+    --bg-card: #22272b;             /* Dark Gray/Blue */
+    --text-primary: #e1e8f0;        /* Light Gray/Blue */
+    --text-secondary: #a1acb8;      /* Medium Light Gray/Blue */
+    --border-color: #404a53;        /* Darker Border */
+    --shadow-color: rgba(0,0,0,0.3);
+    --primary-color: #3b82f6;       /* Brighter Blue */
+    --primary-color-hover: #2563eb;
+    --primary-text-on-bg: #ffffff;
+    --success-color: #22c55e;       /* Brighter Green */
+    --success-color-hover: #16a34a;
+    --danger-color: #ef4444;        /* Brighter Red */
+    --danger-color-hover: #dc2626;
+    --warning-color: #f59e0b;       /* Brighter Amber */
+    --warning-color-hover: #d97706;
+    --warning-text-on-bg: #172b4d;  /* Still dark text on amber */
+    --info-color: #06b6d4;          /* Brighter Cyan */
+    --info-color-hover: #0891b2;
+    --disabled-opacity: 0.5;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-primary); /* Use variable */
+    color: var(--text-primary);          /* Use variable */
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--bg-card);     /* Use variable */
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color var(--transition-speed) ease;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color); /* Use variable */
+    padding-bottom: 20px;
+    position: relative; /* Needed for positioning the toggle */
+    transition: border-color var(--transition-speed) ease;
+}
+
+header h1 {
+    color: var(--primary-color);           /* Use variable */
+    margin-bottom: 5px;
+    transition: color var(--transition-speed) ease;
+}
+
+header h2 {
+    color: var(--text-secondary);          /* Use variable */
+    font-weight: 300;
+    font-size: 1.1em;
+    margin-top: 0;
+    transition: color var(--transition-speed) ease;
+}
+
+/* Dark Mode Toggle Button Styling */
+#darkModeToggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--border-color); /* Button bg based on border color */
+    color: var(--text-secondary);    /* Button text based on secondary text */
+    border: none;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+#darkModeToggle:hover {
+    background: var(--text-secondary); /* Invert on hover */
+    color: var(--bg-card);
+}
+
+
+.card {
+    background-color: var(--bg-card);       /* Use variable */
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 2px var(--shadow-color); /* Use variable */
+    border: 1px solid var(--border-color);     /* Use variable */
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: var(--primary-color);           /* Use variable */
+    border-bottom: 1px solid var(--border-color); /* Use variable */
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    transition: color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.policy-info p {
+    margin: 5px 0;
+    color: var(--text-primary);           /* Use variable */
+    transition: color var(--transition-speed) ease;
+}
+.policy-info p strong {
+     color: var(--text-primary); /* Ensure strong text also changes */
+     font-weight: bold; /* Ensure boldness is maintained */
+}
+
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.status-item {
+    background-color: var(--bg-primary); /* Use variable */
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 5px solid var(--text-secondary); /* Default border color */
+    transition: all var(--transition-speed) ease;
+}
+
+.status-item .label {
+    display: block;
+    font-size: 0.9em;
+    color: var(--text-secondary);          /* Use variable */
+    margin-bottom: 5px;
+    transition: color var(--transition-speed) ease;
+}
+
+.status-item .value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-primary);           /* Default value color */
+    transition: color var(--transition-speed) ease;
+}
+
+/* Power Status Specific Styles - Use Variables */
+.power-status.power-on { border-left-color: var(--success-color); }
+.power-status.power-on .value { color: var(--success-color); }
+.power-status.power-off { border-left-color: var(--danger-color); }
+.power-status.power-off .value { color: var(--danger-color); }
+
+/* Payout Status Specific Styles - Use Variables */
+.payout-status.status-monitoring { border-left-color: var(--info-color); }
+.payout-status.status-monitoring .value { color: var(--info-color); }
+.payout-status.status-threshold-met---pending-payout { border-left-color: var(--warning-color); }
+.payout-status.status-threshold-met---pending-payout .value { color: var(--warning-color); }
+.payout-status.status-payout-initiated { border-left-color: var(--primary-color); }
+.payout-status.status-payout-initiated .value { color: var(--primary-color); }
+.payout-status.status-payout-processed { border-left-color: var(--success-color); }
+.payout-status.status-payout-processed .value { color: var(--success-color); }
+
+.last-updated {
+    font-size: 0.85em;
+    color: var(--text-secondary);         /* Use variable */
+    text-align: right;
+    margin-top: 15px;
+    transition: color var(--transition-speed) ease;
+}
+
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--primary-text-on-bg); /* Default button text color */
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease, opacity var(--transition-speed) ease;
+    text-align: center;
+}
+
+.btn:disabled {
+    opacity: var(--disabled-opacity); /* Use variable */
+    cursor: not-allowed;
+}
+
+/* Button Color Variants - Use Variables */
+.btn-danger { background-color: var(--danger-color); }
+.btn-danger:hover:not(:disabled) { background-color: var(--danger-color-hover); }
+.btn-success { background-color: var(--success-color); }
+.btn-success:hover:not(:disabled) { background-color: var(--success-color-hover); }
+.btn-warning { background-color: var(--warning-color); color: var(--warning-text-on-bg); } /* Special text color */
+.btn-warning:hover:not(:disabled) { background-color: var(--warning-color-hover); }
+.btn-primary { background-color: var(--primary-color); }
+.btn-primary:hover:not(:disabled) { background-color: var(--primary-color-hover); }
+.btn-secondary { background-color: var(--text-secondary); } /* Use secondary text color for bg */
+.btn-secondary:hover:not(:disabled) { background-color: var(--text-primary); } /* Use primary text color for hover */
+.btn-info { background-color: var(--info-color); }
+.btn-info:hover:not(:disabled) { background-color: var(--info-color-hover); }
+
+
+.simulation .note {
+    font-size: 0.9em;
+    color: var(--text-secondary);         /* Use variable */
+    margin-top: 15px;
+    text-align: center;
+    transition: color var(--transition-speed) ease;
+}
